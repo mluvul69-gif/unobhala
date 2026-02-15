@@ -1,5 +1,0 @@
-Flask
-requests
-cryptography
-argon2-cffi
-Werkzeug
