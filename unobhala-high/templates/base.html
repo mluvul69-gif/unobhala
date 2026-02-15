@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Unobhala Secondary School{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- GLOBAL HEADER / NAVIGATION -->
+<header class="header">
+    <div class="header-left">
+        <img
+            src="{{ url_for('static', filename='images/logo-header.png') }}"
+            alt="School Logo"
+            class="header-logo"
+        >
+        <span class="school-name">Unobhala Secondary School</span>
+    </div>
+
+    <nav class="header-right desktop-nav">
+        <a href="{{ url_for('contact') }}">Contact Us</a>
+        <a href="{{ url_for('history') }}">History</a>
+        <a href="{{ url_for('news') }}">News</a>
+        <a href="{{ url_for('shop') }}">Shopping</a>
+        <a href="{{ url_for('admissions') }}">Admissions</a>
+    </nav>
+
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="{{ url_for('contact') }}">Contact Us</a>
+        <a href="{{ url_for('history') }}">History</a>
+        <a href="{{ url_for('admissions') }}">Admissions</a>
+        <a href="{{ url_for('news') }}">News</a>
+        <a href="{{ url_for('shop') }}">Shopping</a>
+        <a href="#">Academics</a>
+    </nav>
+</header>
+
+<!-- PAGE CONTENT -->
+{% block content %}{% endblock %}
+
+<!-- FOOTER -->
+
+<script>
+    const hamburger = document.getElementById("hamburger");
+    const mobileNav = document.getElementById("mobileNav");
+
+    hamburger.addEventListener("click", () => {
+        mobileNav.classList.toggle("active");
+    });
+</script>
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <p>
+            © <span id="year"></span> Unobhala Secondary School.
+            All rights reserved.
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

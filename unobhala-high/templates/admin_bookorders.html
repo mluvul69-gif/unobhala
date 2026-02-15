@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Orders | Admin Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <style>
+        body { font-family: Arial, sans-serif; background:#f8f8f8; margin:0; padding:0; }
+        .container { max-width: 1000px; margin:2rem auto; padding:2rem; background:white; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+        h1 { text-align:center; margin-bottom:1.5rem; }
+        form { display:flex; gap:1rem; margin-bottom:2rem; flex-wrap: wrap; }
+        input { padding:0.5rem; border:1px solid #ccc; border-radius:4px; flex:1; min-width:150px; }
+        button { padding:0.5rem 1rem; background:#0f172a; color:white; border:none; border-radius:4px; cursor:pointer; }
+        button:hover { background:#1e293b; }
+        .order-card { border:1px solid #ddd; padding:1rem; border-radius:8px; margin-bottom:1.5rem; background:#f9f9f9; }
+        .order-header { display:flex; justify-content:space-between; margin-bottom:0.5rem; font-weight:600; }
+        table { width:100%; border-collapse:collapse; margin-top:0.5rem; }
+        th, td { padding:0.5rem; border:1px solid #ccc; text-align:left; }
+        th { background:#0f172a; color:white; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Book Orders</h1>
+
+    <!-- Filter Form -->
+    <form method="POST" action="{{ url_for('admin_bookorders') }}">
+        <input type="text" name="name" placeholder="Customer Name" value="{{ name_filter }}">
+        <input type="text" name="phone" placeholder="Phone Number" value="{{ phone_filter }}">
+        <button type="submit">Filter</button>
+    </form>
+
+    {% if orders_with_items %}
+        {% for order_info in orders_with_items %}
+            {% set order = order_info.order %}
+            {% set items = order_info.items %}
+
+            <div class="order-card">
+                <div class="order-header">
+                    <span><strong>Order ID:</strong> {{ order.id }}</span>
+                    <span><strong>Status:</strong> {{ order.status }}</span>
+                </div>
+                <div class="order-header">
+                    <span><strong>Name:</strong> {{ order.customer_name }}</span>
+                    <span><strong>Phone:</strong> {{ order.customer_phone }}</span>
+                </div>
+                <div class="order-header">
+                    <span><strong>Subtotal:</strong> R{{ "%.2f"|format(order.subtotal) }}</span>
+                    <span><strong>Total Paid:</strong> R{{ "%.2f"|format(order.total_amount) }}</span>
+                </div>
+
+                <!-- Book Items Table -->
+                {% if items %}
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Book Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in items %}
+                            <tr>
+                                <td>{{ item.book_name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>R{{ "%.2f"|format(item.price) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>No books found for this order.</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No orders found.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

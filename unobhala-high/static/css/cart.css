@@ -1,0 +1,138 @@
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background: #e6e8ec;
+    color: #0f172a;
+}
+
+/* TOP BAR */
+
+.cart-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: #081322;
+    color: #fff;
+}
+
+.cart-topbar h1 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* CONTAINER */
+
+.cart-container {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 0 16px;
+}
+
+/* CART ITEM */
+
+.cart-item {
+    display: flex;
+    gap: 14px;
+    background: #fff;
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 14px;
+}
+
+.cart-item img {
+    width: 90px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.cart-info h3 {
+    margin: 0 0 6px;
+    font-size: 1rem;
+}
+
+.price {
+    color: #0f172a;
+    font-weight: 600;
+}
+
+.qty-row {
+    margin-top: 10px;
+    display: flex;
+    gap: 14px;
+    font-size: 0.9rem;
+}
+
+.remove {
+    color: #dc2626;
+    text-decoration: none;
+}
+
+/* DIVIDER */
+
+.divider {
+    height: 1px;
+    background: #e5e7eb;
+    margin: 24px 0;
+}
+
+/* SUMMARY */
+
+.cart-summary {
+    background: #fff;
+    padding: 18px;
+    border-radius: 12px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.total {
+    font-size: 1.1rem;
+}
+
+/* CHECKOUT BUTTON */
+.remove-btn {
+    background: none;
+    border: none;
+    color: #f44336;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+.checkout-btn {
+    width: 100%;
+    margin-top: 16px;
+    padding: 14px;
+    background: #0f172a;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+    .cart-item {
+        flex-direction: row;
+    }
+
+    .cart-item img {
+        width: 80px;
+        height: 100px;
+    }
+}

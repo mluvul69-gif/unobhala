@@ -1,0 +1,140 @@
+.product-detail-container{
+    padding:20px;
+    max-width:1100px;
+    margin:auto;
+}
+
+.product-detail-card{
+    display:flex;
+    gap:40px;
+    background:white;
+    padding:24px;
+    border-radius:14px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+}
+
+
+/* IMAGE */
+
+.product-image-section{
+    flex:1;
+}
+
+.product-detail-image{
+    width:100%;
+    height:420px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+/* INFO */
+
+.product-info-section{
+    flex:1;
+}
+
+.product-title{
+    font-size:1.6rem;
+    margin-bottom:10px;
+}
+
+.product-price{
+    font-size:1.3rem;
+    font-weight:600;
+    color:#0f172a;
+    margin-bottom:12px;
+}
+
+.product-description{
+    color:#475569;
+    margin-bottom:20px;
+}
+
+/* BUY SECTION */
+
+.buy-section{
+    display:flex;
+    align-items:end;
+    gap:16px;
+}
+
+.qty-box{
+    display:flex;
+    flex-direction:column;
+}
+
+.qty-box input{
+    width:50px;
+    padding:8px;
+    border:1px solid #cbd5e1;
+    border-radius:6px;
+}
+
+.add-cart-btn{
+    background:#081322;
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+    margin-bottom: 9px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.add-cart-btn:hover{
+    background:#020617;
+}
+
+/* ---------------- MOBILE ---------------- */
+
+@media (max-width:768px){
+
+    .product-detail-card{
+        flex-direction:column;
+        padding:14px;
+        border-radius:10px;
+    }
+
+    .product-image-section{
+        width:100%;
+    }
+    .product-detail-image{
+        width:100%;
+        height:240px;
+        object-fit:contain;
+        background:#f1f5f9;
+        border-radius:8px;
+    }
+
+    .product-detail-container{
+        padding:12px;
+        max-width:100%;
+    }
+    .buy-section{
+        flex-direction:column;
+        align-items:stretch;
+        gap:10px;
+    }
+
+    .add-cart-btn{
+        width:100%;
+    }
+
+    .qty-box input{
+        width:100%;
+    }
+}
+
+/* SMALL PHONES */
+
+@media (max-width:420px){
+    .product-title{
+        font-size:1.3rem;
+    }
+
+    .product-price{
+        font-size:1.1rem;
+    }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout | Unobhala Secondary School</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+    <style>
+        body { font-family: 'Inter', sans-serif; margin:0; padding:0; background:#f8f8f8; }
+        .hero { background:#0f172a; color:white; padding:2rem; text-align:center; }
+        .checkout-section { max-width:600px; margin:2rem auto; background:white; padding:2rem; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+        .section-title { font-size:1.5rem; margin-bottom:1rem; color:#0f172a; font-weight:600; }
+        input[type="text"] { width:100%; padding:0.75rem; margin-bottom:1rem; border-radius:4px; border:1px solid #ccc; }
+        .cart-summary p { font-weight:600; margin:0.5rem 0; }
+        .add-to-cart-btn { background:#0f172a; color:white; border:none; padding:0.75rem 1.5rem; border-radius:4px; cursor:pointer; font-weight:600; }
+        .add-to-cart-btn:hover { background:#1e293b; }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <h2>Checkout</h2>
+</header>
+
+<section class="checkout-section">
+
+    <div class="section-title">Your Details</div>
+
+    {% if order_id %}
+        <!-- Order already created, redirect to PayFast -->
+        <form action="{{ url_for('payfast_checkout', order_id=order_id) }}" method="GET">
+            <p>Your order is ready. Click below to continue to payment.</p>
+            <button class="add-to-cart-btn" type="submit">Continue to Payment</button>
+        </form>
+    {% else %}
+        <!-- Normal checkout form -->
+        <form method="POST" action="{{ url_for('checkout') }}">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="text" name="phone" placeholder="Phone" required>
+
+            <div class="cart-summary">
+                {% if subtotal is defined and total is defined and delivery_fee is defined %}
+                    <p>Subtotal: R{{ "%.2f"|format(subtotal) }}</p>
+                    <p>Delivery Fee: R{{ "%.2f"|format(delivery_fee) }}</p>
+                    <p>Total: R{{ "%.2f"|format(total) }}</p>
+                {% else %}
+                    <p>Cart is empty or totals not available.</p>
+                {% endif %}
+            </div>
+
+            <button class="add-to-cart-btn" type="submit">Place Order & Continue to Payment</button>
+        </form>
+    {% endif %}
+
+</section>
+
+</body>
+</html>
+
