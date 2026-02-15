@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Admissions Management{% endblock %}
+
+{% block content %}
+
+<section class="admin-admissions">
+
+    <h1 class="page-title">Admissions Applications</h1>
+    <p class="page-subtitle">
+        Review all learner admission requests submitted from the website.
+    </p>
+
+    <div class="table-container">
+
+        <table class="admissions-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Learner Name</th>
+                    <th>Grade</th>
+                    <th>Parent Name</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Payment</th>
+                    <th>Documents</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for a in admissions %}
+                <tr>
+                    <td>{{ a.id }}</td>
+                    <td>{{ a.learner_name }}</td>
+                    <td>{{ a.grade }}</td>
+                    <td>{{ a.parent_name }}</td>
+                    <td>{{ a.phone }}</td>
+
+                    <td>
+                        <span class="status {{ a.status }}">
+                            {{ a.status }}
+                        </span>
+                    </td>
+
+                    <!-- PAYMENT -->
+                    <td>
+                        {% if a.payment_status == "paid" %}
+                            <span class="status approved">
+                                Paid (R{{ a.amount_paid }})
+                            </span>
+                        {% else %}
+                            <td>
+                                <span class="status {{ a.payment_status }}">{{ a.payment_status }}</span>
+                            </td>
+                        {% endif %}
+                    </td>
+
+                    <!-- DOCUMENTS -->
+                    <td>
+                        {% if a.birth_certificate %}
+                            <a href="{{ url_for('static', filename=a.birth_certificate) }}" target="_blank">Birth Cert</a><br>
+                        {% endif %}
+
+                        {% if a.report_card %}
+                            <a href="{{ url_for('static', filename=a.report_card) }}" target="_blank">Report</a><br>
+                        {% endif %}
+
+                        {% if a.parent_id_copy %}
+                            <a href="{{ url_for('static', filename=a.parent_id_copy) }}" target="_blank">Parent ID</a><br>
+                        {% endif %}
+
+                        {% if a.proof_of_residence %}
+                            <a href="{{ url_for('static', filename=a.proof_of_residence) }}" target="_blank">Proof</a>
+                        {% endif %}
+                    </td>
+
+                    <td>{{ a.created_at }}</td>
+
+                    <!-- ACTION -->
+                    <td>
+                        {% if a.payment_status != "paid" %}
+                        <form method="POST" action="{{ url_for('mark_paid', admission_id=a.id) }}">
+                            <button class="approve-btn">Mark Paid</button>
+                        </form>
+                        {% else %}
+                            <span class="status approved">Done</span>
+                        {% endif %}
+                    </td>
+
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="10" class="empty">
+                        No admissions submitted yet.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}
