@@ -4,4 +4,4 @@ cryptography
 argon2-cffi
 Werkzeug
 gunicorn
-
+dotenv
