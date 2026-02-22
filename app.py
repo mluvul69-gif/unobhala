@@ -13,7 +13,9 @@ from flask import (
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
 from werkzeug.utils import secure_filename
+from dotenv import load_dotenv
 
+load_dotenv()
 # ---------------- CONFIG ----------------
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -1174,3 +1176,4 @@ def admin_bookorders():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
+
